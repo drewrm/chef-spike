@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+RUBY_VERSION=$(cat .ruby-version)
+RUBY_GEMSET=$(cat .ruby-gemset)
+
+rvm list | grep "$RUBY_VERSION" > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  rvm install $RUBY_VERSION
+fi
+
+rvm use $RUBY_VERSION@$RUBY_GEMSET
+
+bundle check || bundle install
+
+vagrant status | grep running > /dev/null 2>&1
+if [ $? -ne 0 ]; then 
+  vagrant up
+else
+  vagrant provision
+fi

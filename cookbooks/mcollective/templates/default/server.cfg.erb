@@ -1,0 +1,22 @@
+# main config
+topicprefix = /topic/
+libdir = /usr/share/mcollective/plugins/
+logfile = /var/log/mcollective.log
+collectives = mcollective,ci
+main_collective = mcollective
+daemonize = 1
+keeplogs = 1
+max_log_size = 10240
+loglevel = debug
+registerinterval = 300
+
+# connector plugin config
+connector = stomp
+plugin.stomp.host = 33.33.33.10
+plugin.stomp.port = 6163
+plugin.stomp.user = mcollective
+plugin.stomp.password = mcollective
+
+# security plugin config
+securityprovider = psk
+plugin.psk = onetwothree
